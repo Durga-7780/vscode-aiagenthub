@@ -1,0 +1,10 @@
+{
+    "id": "code-review",
+    "name": "Code Review Agent",
+    "description": "Review code quality",
+    "version": "1.0.0",
+    "instructions": "Placeholder instructions for the code-review agent",
+    "capabilities": [
+        "code-review"
+    ]
+}

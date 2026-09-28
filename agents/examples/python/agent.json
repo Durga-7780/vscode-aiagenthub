@@ -1,0 +1,10 @@
+{
+    "id": "python",
+    "name": "Python Agent",
+    "description": "Python backend development assistant",
+    "version": "1.0.0",
+    "instructions": "Placeholder instructions for the Python agent",
+    "capabilities": [
+        "python-development"
+    ]
+}

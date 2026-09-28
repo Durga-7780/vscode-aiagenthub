@@ -1,0 +1,7 @@
+{
+  "id": "react-agent",
+  "name": "React Agent",
+  "description": "Build React applications from requirement documents",
+  "version": "1.0.0",
+  "skillFile": "SKILL.md"
+}

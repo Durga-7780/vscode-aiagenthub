@@ -1,0 +1,10 @@
+{
+    "id": "angular",
+    "name": "Angular Agent",
+    "description": "Enterprise Angular development assistant",
+    "version": "1.0.0",
+    "instructions": "Placeholder instructions for the Angular agent",
+    "capabilities": [
+        "angular-development"
+    ]
+}
