@@ -92,6 +92,14 @@ export class AgentPanel {
                             fs.writeFileSync(agentJsonPath, JSON.stringify(agentJson, null, 2), 'utf8');
                             
                             this.registry.register(agent);
+                            
+                            // Re-use the underlying registration/activation mechanism that the sidebar uses
+                            // to ensure Copilot immediately recognizes and receives the skill.md context.
+                            try {
+                                await this.agentService.executeAgent(agent.id);
+                            } catch (e: any) {
+                                console.error(`Failed to execute agent during apply: ${e.message}`);
+                            }
                         }
                         
                         // Force a refresh of the sidebar tree provider to immediately reflect applied agents
