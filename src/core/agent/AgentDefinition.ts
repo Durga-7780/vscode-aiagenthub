@@ -11,4 +11,9 @@ export interface AgentDefinition {
     metadata?: Record<string, unknown>;
     category?: string;
     executable?: boolean;
+<<<<<<< HEAD
+=======
+    inputDescription?: string;
+    outputDescription?: string;
+>>>>>>> origin/ui-changes
 }

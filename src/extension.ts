@@ -35,6 +35,15 @@ export async function activate(context: vscode.ExtensionContext) {
         Promise.all(loadPromises).then(() => {
             treeProvider.refresh();
             AgentPanel.refresh();
+<<<<<<< HEAD
+=======
+            
+            // Automatically open dashboard on first run
+            if (!context.globalState.get("agentsDashboardOpened")) {
+                AgentPanel.createOrShow(context.extensionUri, registry, ideDetectionService, agentService);
+                context.globalState.update("agentsDashboardOpened", true);
+            }
+>>>>>>> origin/ui-changes
         }).catch(console.error);
     }, 0);
 

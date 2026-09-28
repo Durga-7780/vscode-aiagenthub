@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .vscode/**
 .git/**
 .gitignore
@@ -20,4 +21,28 @@ node_modules/**
 *.map
 
 *.log
+=======
+.vscode/**
+.git/**
+.gitignore
+
+src/**
+tests/**
+test/**
+coverage/**
+
+*.ts
+!src/**/*.ts
+!src/ui/webview/*.html
+!src/ui/webview/*.css
+!src/ui/webview/*.js
+
+tsconfig.json
+.eslintrc*
+jest.config.*
+node_modules/**
+*.map
+
+*.log
+>>>>>>> origin/ui-changes
 .DS_Store

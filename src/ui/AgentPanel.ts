@@ -36,7 +36,11 @@ export class AgentPanel {
                         const agents = await this.githubAgentService.fetchAgents();
                         this._panel.webview.postMessage({ type: 'agentsLoaded', agents });
                     } catch (err: any) {
+<<<<<<< HEAD
                         this._panel.webview.postMessage({ type: 'agentsRefreshError', message: err.message });
+=======
+                        this._panel.webview.postMessage({ type: 'agentsRefreshError', message: err.message, fallbackAgents: this.registry.getAll() });
+>>>>>>> origin/ui-changes
                     }
                     break;
                 }
@@ -71,6 +75,7 @@ export class AgentPanel {
                         }
                         
                         for (const agent of agentsToApply) {
+<<<<<<< HEAD
                             const filePath = path.join(agentsDir, agent.id + '.md');
                             
                             const mdContent = "---\n" +
@@ -89,6 +94,44 @@ export class AgentPanel {
                         
                         this._panel.webview.postMessage({ type: 'agentsApplied', agentIds: data.agentIds });
                         vscode.window.showInformationMessage("Applied " + agentsToApply.length + " agents to workspace.");
+=======
+                            const agentFolder = path.join(agentsDir, agent.id || agent.name.replace(/\s+/g, '-').toLowerCase());
+                            if (!fs.existsSync(agentFolder)) {
+                                fs.mkdirSync(agentFolder, { recursive: true });
+                            }
+                            
+                            const skillFileName = agent.skillFile || 'skill.md';
+                            const skillFilePath = path.join(agentFolder, skillFileName);
+                            const agentJsonPath = path.join(agentFolder, 'agent.json');
+                            
+                            // Write skill.md containing the instructions
+                            if (agent.instructions) {
+                                fs.writeFileSync(skillFilePath, agent.instructions, 'utf8');
+                            } else {
+                                fs.writeFileSync(skillFilePath, `# ${agent.name}\n`, 'utf8');
+                            }
+                            
+                            // Write agent.json metadata
+                            const agentJson = { ...agent, instructions: undefined, skillFile: skillFileName };
+                            fs.writeFileSync(agentJsonPath, JSON.stringify(agentJson, null, 2), 'utf8');
+                            
+                            this.registry.register(agent);
+                            
+                            // Re-use the underlying registration/activation mechanism that the sidebar uses
+                            // to ensure Copilot immediately recognizes and receives the skill.md context.
+                            try {
+                                await this.agentService.executeAgent(agent.id);
+                            } catch (e: any) {
+                                console.error(`Failed to execute agent during apply: ${e.message}`);
+                            }
+                        }
+                        
+                        // Force a refresh of the sidebar tree provider to immediately reflect applied agents
+                        vscode.commands.executeCommand('aiAgentHub.refreshAgents');
+                        
+                        this._panel.webview.postMessage({ type: 'agentsApplied', agentIds: data.agentIds });
+                        vscode.window.showInformationMessage(`Applied ${agentsToApply.length} agent(s) to workspace.`);
+>>>>>>> origin/ui-changes
                     } catch (err: any) {
                         vscode.window.showErrorMessage("Failed to apply agents: " + err.message);
                     }
@@ -145,11 +188,17 @@ export class AgentPanel {
             this._panel.webview.postMessage({ type: 'agentsLoaded', agents });
         } catch (err: any) {
             const agents = this.registry.getAll();
+<<<<<<< HEAD
             if (agents && agents.length > 0) {
                  this._panel.webview.postMessage({ type: 'agentsLoaded', agents });
                  vscode.window.showWarningMessage('GitHub unavailable, loaded agents from last known state.');
             } else {
                  this._panel.webview.postMessage({ type: 'agentsRefreshError', message: err.message });
+=======
+            this._panel.webview.postMessage({ type: 'agentsRefreshError', message: err.message, fallbackAgents: agents });
+            if (agents && agents.length > 0) {
+                 vscode.window.showWarningMessage('GitHub unavailable, loaded agents from last known state.');
+>>>>>>> origin/ui-changes
             }
         }
     }

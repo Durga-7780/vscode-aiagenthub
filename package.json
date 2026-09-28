@@ -77,7 +77,11 @@
         },
         "aiAgentHub.githubSource": {
           "type": "string",
+<<<<<<< HEAD
           "default": "https://raw.githubusercontent.com/example/agents/main/agents.json",
+=======
+          "default": "https://raw.githubusercontent.com/Durga-7780/vscode-aiagenthub/master/agents.json",
+>>>>>>> origin/ui-changes
           "description": "URL to the GitHub JSON endpoint or repository containing agent definitions."
         },
         "aiAgentHub.defaultAgent": {

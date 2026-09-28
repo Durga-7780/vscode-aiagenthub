@@ -38,6 +38,9 @@ Your job is to build the React application directly in the current workspace.
 13. Repeat validation until the implementation is working.
 14. Give the user a concise summary of what was implemented.
 
+15. For React projects, verify that the module referenced by the script in `index.html` is the module that mounts the app with `createRoot(...).render(...)`. Do not point `index.html` at a component-only module, because the project can build successfully while the browser renders an empty root element.
+16. Start the development server and verify in the browser that the expected UI is visible before finalizing.
+
 ## Important
 
 You have access to workspace and terminal tools.
