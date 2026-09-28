@@ -52,7 +52,8 @@ Adapters implement the `IdeAdapter` interface. They provide an `isAvailable()` d
 ## 6. How to Run the Extension
 1. Install dependencies: `npm install`
 2. Compile everything: `npm run compile`
-3. Press `F5` in VS Code, or choose the "Run Extension" configuration to start a new Extension Development Host window.
+3. Build VSIX file `npm run package`
+4. Press `F5` in VS Code, or choose the "Run Extension" configuration to start a new Extension Development Host window.
 
 ## 7. Current Limitations
 - Phase 1 limits adapters to check existence and mock the log output. 
