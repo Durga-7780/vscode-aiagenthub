@@ -1,0 +1,122 @@
+{
+  "name": "ai-agent-hub",
+  "displayName": "AI Agent Hub",
+  "description": "Cross-IDE AI Agent Hub that manages reusable coding agents",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onView:aiAgentHubSidebar",
+    "onCommand:aiAgentHub.open",
+    "onCommand:aiAgentHub.refreshAgents",
+    "onCommand:aiAgentHub.selectAgent",
+    "onCommand:aiAgentHub.showIntegrations",
+    "onCommand:aiAgentHub.reloadConfiguration"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "chatParticipants": [
+      {
+        "id": "ai-agent-hub.chat",
+        "name": "ai-agent-hub",
+        "fullName": "AI Agent Hub",
+        "description": "Use the selected AI Agent with GitHub Copilot"
+      }
+    ],
+    "commands": [
+      {
+        "command": "aiAgentHub.open",
+        "title": "AI Agent Hub: Open Agents"
+      },
+      {
+        "command": "aiAgentHub.refreshAgents",
+        "title": "AI Agent Hub: Refresh Agents"
+      },
+      {
+        "command": "aiAgentHub.selectAgent",
+        "title": "AI Agent Hub: Select Agent"
+      },
+      {
+        "command": "aiAgentHub.showIntegrations",
+        "title": "AI Agent Hub: Show Integrations"
+      },
+      {
+        "command": "aiAgentHub.reloadConfiguration",
+        "title": "AI Agent Hub: Reload Configuration"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "aiAgentHubExplorer",
+          "title": "AI Agent Hub",
+          "icon": "resources/icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "aiAgentHubExplorer": [
+        {
+          "id": "aiAgentHubSidebar",
+          "name": "Agents"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AI Agent Hub",
+      "properties": {
+        "aiAgentHub.agentsPath": {
+          "type": "string",
+          "default": "",
+          "description": "Custom path to load agents from. If empty, the bundled agents are used."
+        },
+        "aiAgentHub.githubSource": {
+          "type": "string",
+          "default": "https://raw.githubusercontent.com/example/agents/main/agents.json",
+          "description": "URL to the GitHub JSON endpoint or repository containing agent definitions."
+        },
+        "aiAgentHub.defaultAgent": {
+          "type": "string",
+          "default": "",
+          "description": "Default agent ID to activate."
+        },
+        "aiAgentHub.defaultAdapter": {
+          "type": "string",
+          "default": "vscode",
+          "description": "Default IDE adapter to use."
+        },
+        "aiAgentHub.enableTelemetry": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable telemetry."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./jest",
+    "package": "npm run compile && vsce package"
+  },
+  "devDependencies": {
+    "@types/node": "18.x",
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "@vscode/vsce": "^4.0.0",
+    "eslint": "^8.49.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@vscode/chat-extension-utils": "^0.0.0-alpha.5"
+  }
+}

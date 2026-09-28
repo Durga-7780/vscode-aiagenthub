@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline' vscode-webview-resource:; script-src 'unsafe-inline' vscode-webview-resource:; img-src data: vscode-webview-resource:;">
+    <title>AI Agent Hub - Agents</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="categories-container">
+        <div class="dashboard-container">
+            <div class="header">
+                <div class="header-text">
+                    <h1>Agents</h1>
+                    <p>Select agents and click Apply to add them to your workspace.</p>
+                </div>
+                <div class="header-actions">
+                    <button id="refreshBtn">↻ Refresh Agents</button>
+                </div>
+            </div>
+
+            <div id="contentArea">
+                <!-- Rendered lists go here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-inner">
+            <button id="applyBtn" disabled>Apply Selected</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
